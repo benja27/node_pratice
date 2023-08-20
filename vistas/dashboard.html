@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Panel de Control</title>
+</head>
+<body>
+    <h1>Bienvenido, <span id="username"></span></h1>
+    <p>Has visitado esta página <span id="visitas"></span> veces.</p>
+    <a href="/logout">Cerrar Sesión</a>
+  
+
+    <script>
+      // Función para obtener el valor de una cookie por su nombre
+      console.log('hola hola')
+      function getCookie(name) {
+          console.log(name)
+          const value = `; ${document.cookie}`;
+          const parts = value.split(`; ${name}=`);
+          console.log(parts)
+          // console.log(parts.pop().split(';'))
+          // if (parts.length === 2) return parts.pop().split(';').shift();
+          console.log(parts.pop()) 
+          return parts.pop()
+          // if (parts.length === 2) return parts.pop().split(';').shift();
+      }
+
+      // Obtener el valor de la cookie de sesión que contiene los datos del usuario
+      const sessionData = getCookie('connect.sid');
+
+      console.log('session-data', sessionData)
+
+      if (sessionData) {
+          // Decodificar la cookie de sesión (depende del formato de tu cookie)
+          const sessionObj = JSON.parse(decodeURIComponent(sessionData));
+
+          console.log(sessionObj,'sessio obj')
+
+          // Acceder a los datos de sesión en el cliente
+          const usuario = sessionObj.usuario;
+          const visitas = sessionObj.visitas;
+
+          // Insertar datos de sesión en la página
+          document.getElementById('username').textContent = usuario;
+          document.getElementById('visitas').textContent = visitas;
+      }
+  </script>
+</body>
+</html>
+<!-- En este ejemplo, estamos utilizando JavaScript para obtener el valor de la cookie de sesión (connect.sid es el nombre de la cookie de sesión por defecto en Express) que contiene los datos del usuario. Luego, decodificamos el valor de la cookie de sesión (esto puede variar dependiendo de cómo esté formateada tu cookie) y accedemos a los datos de sesión en el cliente. Finalmente, insertamos los datos en la página HTML. -->
+
+<!-- Ten en cuenta que el proceso de obtener y decodificar la cookie de sesión puede variar según cómo esté configurada en tu aplicación y cómo se almacenan los datos de sesión en las cookies. Asegúrate de adaptar el código a la configuración específica de tu aplicación. -->
+
+
+
+
+
+
+</body>
+</html>
